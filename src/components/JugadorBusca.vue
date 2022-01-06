@@ -1,5 +1,5 @@
 <template>
-  <form class="row g-3 mb-3">
+  <form class="row g-3 mb-3" v-on:submit.prevent="buscar()">
     <div class="input-group">
       <input
         type="text"

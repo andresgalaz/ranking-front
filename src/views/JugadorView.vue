@@ -15,6 +15,7 @@
       :jugadores="jugadores"
       :getJugadores="getJugadores"
       :isLoading="isLoading"
+      :pagina="pagina"
     />
   </div>
 </template>
@@ -31,6 +32,7 @@ export default {
   name: "JugadorView",
   components: { JugadorList, JugadorBusca },
   setup() {
+    const pagina = ref(0);
     const jugadores = ref([]);
     const isLoading = ref(true);
     const error = ref(null);
@@ -41,7 +43,7 @@ export default {
 
     const getJugadores = async (salto = 0, filtro = "") => {
       isLoading.value = true;
-      console.log(`getJugadores:`, salto, ",", filtro);
+      pagina.value = Math.floor(salto / config.pageSize);
       try {
         const json = await axios(
           `${config.serverBaseURL}/jugador?salto=${salto}&filtro=${filtro}`
@@ -55,7 +57,7 @@ export default {
       }
     };
 
-    return { jugadores, getJugadores, isLoading, error };
+    return { jugadores, getJugadores, isLoading, error, pagina };
   },
 };
 </script>

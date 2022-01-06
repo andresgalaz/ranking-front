@@ -39,15 +39,17 @@
           </tr>
         </tbody>
       </table>
+      <div v-if="jugadores.length == 0">
+        <div v-if="pagina == 0">No hay jugadores para el filtro solicitado</div>
+        <div v-if="pagina > 0">
+          Llegó al final, no hay mas registros para mostrar
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-// import { onMounted } from "vue";
-//import axios from "axios";
-//import { server } from "../helper";
-
 import Spinner from "../components/Spinner";
 
 export default {
@@ -57,6 +59,7 @@ export default {
     getJugadores: Function,
     isLoading: Boolean,
     error: Object,
+    pagina: Number,
   },
   components: { Spinner },
 };
